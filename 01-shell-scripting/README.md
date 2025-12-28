@@ -39,9 +39,11 @@ These checks act as early warning indicators, allowing engineers to take correct
 
 ## Example output
 **When system resources are within acceptable limits**
+
 Status: OK | Disk: 45% | Memory: 62% | CPU Load: 0.35
 
 **If thresholds are exceeded**
+
 Status: WARNING | Disk: 82% | Memory: 77% | CPU Load: 1.20
 
 
@@ -55,6 +57,12 @@ Status: WARNING | Disk: 82% | Memory: 77% | CPU Load: 1.20
 
 The script is version-controlled within this Git repository.  
 For execution, it is deployed to `/opt/sysmonitor/bin/`, which mirrors common Linux production practices where source code and runtime artifacts are separated.
+
+### Deployment Consideration
+
+The script is maintained in source control and copied to `/opt/sysmonitor/bin/` for execution.
+Changes made in the repository must be redeployed to the runtime location to take effect.
+
 
 ## Automation with Cron
 
