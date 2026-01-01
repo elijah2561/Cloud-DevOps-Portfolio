@@ -20,7 +20,7 @@ if [ ! -d Cloud-DevOps-portfolio ]; then
 fi
 
 # Copy script
-cp Cloud-DevOps-portfolio/01-shell-scripting/system_health_check.sh /opt/sysmonitor/bin/
+cp Cloud-DevOps-Portfolio/01-shell-scripting/system_health_check.sh /opt/sysmonitor/bin/
 
 # Permissions
 chown -R sysmonitor:sysmonitor /opt/sysmonitor /var/log/sysmonitor
