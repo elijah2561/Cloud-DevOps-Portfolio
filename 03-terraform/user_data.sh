@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 
@@ -18,6 +19,7 @@ mkdir -p /var/log/sysmonitor
 cd /opt
 git clone https://github.com/elijah2561/Cloud-DevOps-portfolio.git
 
+
 # Copy script
 cp Cloud-DevOps-portfolio/01-shell-scripting/system_health_check.sh /opt/sysmonitor/bin/
 
@@ -32,6 +34,4 @@ echo "*/5 * * * * /opt/sysmonitor/bin/system_health_check.sh" | crontab -u sysmo
 
 EOF
 
-# Basic logging
-echo "Bootstrap completed at $(date)" >> /var/log/sysmonitor/bootstrap.log
 
