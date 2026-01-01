@@ -15,7 +15,7 @@ mkdir -p /var/log/sysmonitor
 
 # Clone repo if not already present
 cd /opt
-if [ ! -d Cloud-DevOps-portfolio ]; then
+if [ ! -d Cloud-DevOps-Portfolio ]; then
     git clone https://github.com/elijah2561/Cloud-DevOps-Portfolio.git
 fi
 
