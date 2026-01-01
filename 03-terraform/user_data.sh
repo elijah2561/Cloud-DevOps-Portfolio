@@ -1,6 +1,4 @@
-
 #!/bin/bash
-
 
 set -e
 
@@ -15,10 +13,11 @@ id sysmonitor || useradd -r -s /bin/false sysmonitor
 mkdir -p /opt/sysmonitor/bin
 mkdir -p /var/log/sysmonitor
 
-# Clone repo
+# Clone repo if not already present
 cd /opt
-git clone https://github.com/elijah2561/Cloud-DevOps-portfolio.git
-
+if [ ! -d Cloud-DevOps-portfolio ]; then
+    git clone https://github.com/elijah2561/Cloud-DevOps-portfolio.git
+fi
 
 # Copy script
 cp Cloud-DevOps-portfolio/01-shell-scripting/system_health_check.sh /opt/sysmonitor/bin/
@@ -29,9 +28,5 @@ chmod 750 /opt/sysmonitor/bin
 chmod 750 /var/log/sysmonitor
 chmod 750 /opt/sysmonitor/bin/system_health_check.sh
 
-# Cron job
-echo "*/5 * * * * /opt/sysmonitor/bin/system_health_check.sh" | crontab -u sysmonitor -
-
-EOF
-
-
+# Cron job (ensure full path to bash)
+echo "*/5 * * * * /bin/bash /opt/sysmonitor/bin/system_health_check.sh" | crontab -u sysmonitor -
