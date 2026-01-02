@@ -1,0 +1,7 @@
+---
+- name: Configure system monitoring host
+  hosts: sysmonitor
+  become: true
+  roles:
+    - sysmonitor
+

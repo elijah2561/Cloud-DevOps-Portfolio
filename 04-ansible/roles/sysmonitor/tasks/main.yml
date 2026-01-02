@@ -1,0 +1,40 @@
+---
+- name: Ensure sysmonitor service user exists
+  user:
+    name: sysmonitor
+    system: yes
+    shell: /usr/sbin/nologin
+    create_home: no
+
+- name: Create application directory
+  file:
+    path: /opt/sysmonitor/bin
+    state: directory
+    owner: sysmonitor
+    group: sysmonitor
+    mode: '0750'
+    recurse: yes
+
+- name: Create log directory
+  file:
+    path: /var/log/sysmonitor
+    state: directory
+    owner: sysmonitor
+    group: sysmonitor
+    mode: '0750'
+
+- name: Deploy monitoring script
+  copy:
+    src: system_health_check.sh
+    dest: /opt/sysmonitor/bin/system_health_check.sh
+    owner: sysmonitor
+    group: sysmonitor
+    mode: '0750'
+
+- name: Configure cron job for monitoring
+  cron:
+    name: "System health monitoring"
+    user: sysmonitor
+    minute: "*/5"
+    job: "/opt/sysmonitor/bin/system_health_check.sh"
+
