@@ -1,0 +1,24 @@
+
+PLAY [Configure system monitoring host] ****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [ec2]
+
+TASK [sysmonitor : Ensure sysmonitor service user exists] **********************
+ok: [ec2]
+
+TASK [sysmonitor : Create application directory] *******************************
+ok: [ec2]
+
+TASK [sysmonitor : Create log directory] ***************************************
+ok: [ec2]
+
+TASK [sysmonitor : Deploy monitoring script] ***********************************
+ok: [ec2]
+
+TASK [sysmonitor : Configure cron job for monitoring] **************************
+ok: [ec2]
+
+PLAY RECAP *********************************************************************
+ec2                        : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

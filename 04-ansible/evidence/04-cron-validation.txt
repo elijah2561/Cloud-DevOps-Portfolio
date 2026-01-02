@@ -1,0 +1,3 @@
+*/6 * * * * /bin/bash /opt/sysmonitor/bin/system_health_check.sh
+#Ansible: System health monitoring
+*/5 * * * * /opt/sysmonitor/bin/system_health_check.sh
