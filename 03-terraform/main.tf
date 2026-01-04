@@ -54,8 +54,8 @@ resource "aws_instance" "sysmonitor" {
   ]
 
   tags = {
- Name    = "sysmonitor-terraform"
+    Name    = "sysmonitor-terraform"
     Project = "Cloud-DevOps-Portfolio"
   }
 }
-    
+
