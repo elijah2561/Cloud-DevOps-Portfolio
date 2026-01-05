@@ -9,9 +9,14 @@ variable "instance_type" {
   type        = string
   default     = "t3.micro"
 }
-variable "ssh_allowed_cidr" {
+
+variable "allowed_ssh_cidr" {
   description = "CIDR block allowed to SSH into the instance"
   type        = string
 }
 
+variable "ssh_public_key" {
+  description = "Public SSH key for EC2 access"
+  type        = string
+}
 
