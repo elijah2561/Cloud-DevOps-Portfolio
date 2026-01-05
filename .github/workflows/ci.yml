@@ -1,41 +1,35 @@
-name: Cloud DevOps CI
+terraform:
+  name: Terraform Validation
+  runs-on: ubuntu-latest
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  env:
+    AWS_DEFAULT_REGION: us-east-1
+    TF_VAR_allowed_ssh_cidr: "203.0.113.10/32"
 
-jobs:
-  terraform:
-    name: Terraform Validation
-    runs-on: ubuntu-latest
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+    - name: Terraform Format Check
+      working-directory: 03-terraform
+      run: terraform fmt -check -recursive
 
-      - name: Terraform Format Check
-        working-directory: 03-terraform
-        run: terraform fmt -check -recursive
+    - name: Terraform Init (no backend)
+      working-directory: 03-terraform
+      run: terraform init -backend=false
 
-      - name: Terraform Init (no backend)
-        working-directory: 03-terraform
-        run: terraform init -backend=false
+    - name: Terraform Validate
+      working-directory: 03-terraform
+      run: terraform validate
 
-      - name: Terraform Validate
-        working-directory: 03-terraform
-        run: terraform validate
+    - name: Terraform Plan (example vars)
+      working-directory: 03-terraform
+      run: terraform plan -var-file="terraform.tfvars.example" -input=false
 
-      - name: Terraform Plan (example vars)
-        working-directory: 03-terraform
-        run: terraform plan -var-file="terraform.tfvars.example" -input=false
-
-
-  ansible:
+ ansible:
     name: Ansible Syntax Check
     runs-on: ubuntu-latest
 
@@ -49,4 +43,3 @@ jobs:
       - name: Ansible Playbook Syntax Check
         working-directory: 04-ansible
         run: ansible-playbook playbooks/sysmonitor.yml --syntax-check
-
