@@ -28,7 +28,12 @@ jobs:
 
       - name: Terraform Validate
         working-directory: 03-terraform
-        run: terraform validate 
+        run: terraform validate
+
+      - name: Terraform Plan (example vars)
+        working-directory: 03-terraform
+        run: terraform plan -var-file="terraform.tfvars.example" -input=false
+
 
   ansible:
     name: Ansible Syntax Check
