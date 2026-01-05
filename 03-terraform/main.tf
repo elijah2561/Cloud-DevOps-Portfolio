@@ -13,34 +13,14 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_security_group" "sysmonitor_sg" {
-  name        = "sysmonitor-sg"
-  description = "Security group for sysmonitor EC2 instance"
-
-  ingress {
-    description = "SSH access"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.ssh_allowed_cidr]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name    = "sysmonitor-sg"
-    Project = "Cloud-DevOps-Portfolio"
-  }
+variable "ssh_public_key" {
+  description = "Public SSH key for EC2 access"
+  type        = string
 }
 
 resource "aws_key_pair" "sysmonitor_key" {
-  key_name   = "sysmonitor-terraform-key"
-  public_key = file("~/.ssh/sysmonitor_terraform.pub")
+  key_name   = "sysmonitor-key"
+  public_key = var.ssh_public_key
 }
 
 resource "aws_instance" "sysmonitor" {
